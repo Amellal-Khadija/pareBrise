@@ -249,8 +249,12 @@ export default function Services() {
         .svc-featured-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.38); }
 
         @media (max-width: 639px) {
-          .svc-featured { grid-template-columns: 1fr; padding: 28px 24px; gap: 24px; }
-          .svc-featured-cta { align-self: flex-start; }
+          .svc-featured { grid-template-columns: 1fr; padding: 22px 18px; gap: 18px; }
+          .svc-featured-cta { align-self: flex-start; padding: 11px 20px; font-size: 13px; }
+          .svc-featured-title { font-size: 18px; }
+          .svc-featured-desc  { font-size: 13px; }
+          .svc-featured-icon  { width: 44px; height: 44px; margin-bottom: 14px; }
+          .svc-featured-badge { font-size: 10px; margin-bottom: 12px; }
         }
 
         /* ── GRID CARDS ── */
@@ -258,6 +262,9 @@ export default function Services() {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
           gap: 14px;
+        }
+        @media (max-width: 639px) {
+          .svc-grid { grid-template-columns: 1fr; gap: 10px; }
         }
 
         .svc-card {
@@ -371,8 +378,32 @@ export default function Services() {
         .btn-devis:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.42); }
 
         @media (max-width: 639px) {
-          #services { padding: 64px 0; }
-          .svc-strip { padding: 24px; flex-direction: column; align-items: flex-start; }
+          #services { padding: 48px 0; }
+
+          /* Header */
+          .svc-header { margin-bottom: 28px; gap: 12px; }
+          .svc-title  { font-size: 24px !important; }
+
+          /* Cards */
+          .svc-card { padding: 18px; border-radius: 12px; }
+          .svc-card::before { font-size: 56px; }
+          .svc-icon-wrap  { width: 42px; height: 42px; border-radius: 11px; margin-bottom: 14px; }
+          .svc-card-title { font-size: 14px; margin-bottom: 6px; }
+          .svc-card-desc  { font-size: 13px; line-height: 1.6; }
+
+          /* Strip */
+          .svc-strip {
+            padding: 20px 18px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+          }
+          .svc-strip-title { font-size: 15px; }
+          .svc-strip-sub   { font-size: 13px; }
+          .btn-call, .btn-devis {
+            justify-content: center;
+            width: 100%;
+          }
         }
       `}</style>
 
