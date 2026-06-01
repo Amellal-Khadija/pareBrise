@@ -95,11 +95,26 @@ export default function Hero() {
         }
         .hero-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.12); align-self: center; }
 
+        .hero-ctas {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
         @media (max-width: 480px) {
-          .hero-title { font-size: 34px !important; }
-          .hero-sub   { font-size: 15px !important; }
-          .hero-cta-primary, .hero-cta-secondary { padding: 13px 22px; font-size: 14px; }
-          .hero-stat-num  { font-size: 20px; }
+          .hero-content-block { max-width: 100% !important; }
+        }
+
+        @media (max-width: 480px) {
+          .hero-title  { font-size: 26px !important; line-height: 1.15 !important; letter-spacing: -0.02em !important; }
+          .hero-sub    { font-size: 13px !important; margin-bottom: 24px !important; max-width: 100% !important; }
+          .hero-eyebrow { font-size: 9px !important; letter-spacing: 0.18em !important; }
+          .hero-ctas   { flex-direction: column; align-items: flex-start; gap: 8px; }
+          .hero-cta-primary  { padding: 12px 22px; font-size: 13px; gap: 7px; }
+          .hero-cta-secondary { padding: 11px 20px; font-size: 13px; }
+          .hero-live-badge { font-size: 10px; padding: 5px 10px; margin-bottom: 14px; gap: 6px; }
+          .hero-stat-num  { font-size: 18px; }
           .hero-divider   { display: none; }
         }
 
@@ -172,7 +187,7 @@ export default function Hero() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 pb-24 lg:pb-32">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 sm:px-10 lg:px-20 pb-32 sm:pb-24 lg:pb-32">
           <AnimatePresence mode="wait">
             <motion.div
               key={vidIdx}
@@ -180,7 +195,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.65, ease: 'easeOut' }}
-              className="max-w-3xl"
+              className="max-w-3xl hero-content-block"
             >
               {/* Live badge */}
               <div className="hero-live-badge">
@@ -206,7 +221,7 @@ export default function Hero() {
               </p>
 
               {/* CTAs */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+              <div className="hero-ctas">
                 <a href="#contact" className="hero-cta-primary">
                   Devis gratuit — 30 min
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

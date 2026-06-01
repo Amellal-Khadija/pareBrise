@@ -92,6 +92,16 @@ export default function Footer() {
           letter-spacing: 0.18em; text-transform: uppercase;
           margin-bottom: 18px;
         }
+
+        .ft-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 40px;
+          margin-bottom: 44px;
+        }
+        @media (max-width: 479px) {
+          .ft-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+        }
       `}</style>
 
       <footer style={{ background: '#0c1a3a', position: 'relative', overflow: 'hidden' }}>
@@ -121,12 +131,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-              gap: '40px',
-              marginBottom: '44px',
-            }}
+            className="ft-grid"
           >
 
             {/* Brand */}

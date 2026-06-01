@@ -228,6 +228,16 @@ export default function Contact() {
 
         .ct-select option { background: #ffffff; color: #0F172A; }
 
+        .ct-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 56px;
+          align-items: start;
+        }
+        @media (max-width: 767px) {
+          .ct-grid { gap: 28px; }
+        }
+
         .ct-name-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -240,6 +250,8 @@ export default function Contact() {
         @media (max-width: 639px) {
           #contact { padding: 64px 0; }
           .ct-wa-btn, .ct-call-btn { padding: 12px 12px; font-size: 12px; }
+          .ct-left-panel { padding: 28px 20px; }
+          .ct-form-box { padding: 24px 20px !important; }
         }
 
         .ct-submit {
@@ -278,12 +290,7 @@ export default function Contact() {
 
       <section id="contact">
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '56px',
-            alignItems: 'start',
-          }}>
+          <div className="ct-grid">
 
             {/* LEFT — Dark panel */}
             <motion.div {...fadeUp(0)} className="ct-left-panel">
@@ -373,7 +380,7 @@ export default function Contact() {
 
             {/* RIGHT — form */}
             <motion.div {...fadeUp(0.1)}>
-              <div style={{
+              <div className="ct-form-box" style={{
                 padding: '36px', borderRadius: '20px',
                 border: '1.5px solid #F1F5F9', background: '#ffffff',
                 boxShadow: '0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',

@@ -115,7 +115,10 @@ export default function Navbar() {
           border-bottom: 1px solid rgba(226,232,240,0.8);
           transition: top 0.22s ease, box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
         }
-        @media (max-width: 1023px) { .nb-bar { height: 70px; } }
+        @media (max-width: 1023px) {
+          .nb-bar { height: 70px; }
+          .nb-logo img { height: 56px !important; }
+        }
 
         .nb-bar.scrolled {
           background: rgba(255,255,255,0.88);

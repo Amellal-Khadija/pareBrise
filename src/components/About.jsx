@@ -234,6 +234,15 @@ export default function About() {
         @media (max-width: 767px) {
           .ab-mosaic { grid-template-rows: 200px 160px; }
           .ab-stats-row { grid-template-columns: 1fr 1fr; }
+          .ab-badge-rating span:last-child { display: none; }
+        }
+        @media (max-width: 479px) {
+          .ab-badge-exp { padding: 7px 10px; }
+          .ab-badge-exp-val { font-size: 18px; }
+          .ab-badge-rating { padding: 4px 8px; }
+          .ab-badge-certified { padding: 4px 8px; }
+          .ab-stat-card { padding: 10px 8px; }
+          .ab-stat-value { font-size: 17px; }
         }
         .ab-grid {
           display: grid;
