@@ -12,6 +12,19 @@ dist
 dist-ssr
 *.local
 
+# Environment variables — NEVER commit secrets
+.env
+.env.*
+!.env.example
+
+# Certificates & keys
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +35,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Build cache
+.cache
+.parcel-cache
+.turbo
