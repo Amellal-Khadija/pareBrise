@@ -260,7 +260,53 @@ export default function HowWeWork() {
           position: relative; z-index: 1;
         }
 
-        @media (max-width: 639px) { #how-we-work { padding: 90px 0 72px; } }
+        .hw-header { margin-bottom: 56px; }
+        @media (max-width: 639px) { #how-we-work { padding: 72px 0 56px; } .hw-header { margin-bottom: 36px; } }
+
+        @media (max-width: 480px) {
+          #how-we-work { padding: 56px 0 44px; }
+
+          .hw-eyebrow { font-size: 9px; letter-spacing: 0.16em; }
+
+          .hw-title { font-size: 22px !important; letter-spacing: -0.02em; }
+
+          .hw-steps {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .hw-step {
+            padding: 16px 14px 20px;
+            border-radius: 14px;
+          }
+
+          .hw-step::before { font-size: 56px; bottom: -10px; right: 6px; }
+
+          .hw-step-circle {
+            width: 40px; height: 40px;
+            font-size: 15px;
+            margin-bottom: 12px;
+          }
+
+          .hw-step-icon {
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            margin-bottom: 12px;
+          }
+
+          .hw-step-label { font-size: 9px; letter-spacing: 0.16em; margin-bottom: 6px; }
+
+          .hw-step-title { font-size: 14px; margin-bottom: 6px; }
+
+          .hw-step-desc { font-size: 12.5px; line-height: 1.6; }
+
+          .hw-badge {
+            padding: 8px 16px;
+            font-size: 11.5px;
+            margin-top: 32px;
+            gap: 6px;
+          }
+        }
       `}</style>
 
       <section id="how-we-work">
@@ -283,7 +329,7 @@ export default function HowWeWork() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.25, 0.1, 0.1, 1] }}
-            style={{ marginBottom: '56px' }}
+            className="hw-header"
           >
             <p className="hw-eyebrow" style={{ marginBottom: '16px' }}>Notre méthode</p>
             <h2 className="hw-title">4 étapes, <em>zéro compromis.</em></h2>
