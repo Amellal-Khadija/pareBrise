@@ -19,6 +19,7 @@ const COLORS = [
   { hex: '#6EE7B7', name: 'Vert'      },
 ]
 
+useGLTF.setDecoderPath('/draco/')
 CARS.forEach(c => useGLTF.preload(c.file))
 
 function CarModel({ file, color }) {
@@ -409,13 +410,13 @@ export default function CarShowcase3D() {
                     <directionalLight position={[8, 10, 5]} intensity={2.5} castShadow />
                     <directionalLight position={[-5, 5, -5]} intensity={0.8} />
                     <pointLight position={[0, 3, -2]} intensity={0.4} color="#60A5FA" />
-                    <Environment preset="city" background={false} />
                     <Suspense fallback={
                       <mesh>
                         <boxGeometry args={[1, 1, 1]} />
                         <meshStandardMaterial color="#334155" />
                       </mesh>
                     }>
+                      <Environment preset="city" background={false} />
                       <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
                       <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />
                     </Suspense>
