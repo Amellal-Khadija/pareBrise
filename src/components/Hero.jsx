@@ -103,19 +103,20 @@ export default function Hero() {
         }
 
         @media (max-width: 480px) {
-          .hero-content-block { max-width: 100% !important; }
-        }
-
-        @media (max-width: 480px) {
-          .hero-title  { font-size: 26px !important; line-height: 1.15 !important; letter-spacing: -0.02em !important; }
-          .hero-sub    { font-size: 13px !important; margin-bottom: 24px !important; max-width: 100% !important; }
-          .hero-eyebrow { font-size: 9px !important; letter-spacing: 0.18em !important; }
-          .hero-ctas   { flex-direction: column; align-items: flex-start; gap: 8px; }
-          .hero-cta-primary  { padding: 12px 22px; font-size: 13px; gap: 7px; }
-          .hero-cta-secondary { padding: 11px 20px; font-size: 13px; }
-          .hero-live-badge { font-size: 10px; padding: 5px 10px; margin-bottom: 14px; gap: 6px; }
-          .hero-stat-num  { font-size: 18px; }
-          .hero-divider   { display: none; }
+          .hero-content-block {
+            max-width: 100% !important;
+            border-left: 2px solid rgba(249,115,22,0.5);
+            padding-left: 14px;
+          }
+          .hero-title    { font-size: 22px !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; }
+          .hero-title-accent { font-size: 22px !important; }
+          .hero-sub      { font-size: 12.5px !important; margin-bottom: 20px !important; max-width: 100% !important; line-height: 1.6 !important; }
+          .hero-eyebrow  { font-size: 9px !important; letter-spacing: 0.16em !important; }
+          .hero-ctas     { flex-direction: column; align-items: flex-start; gap: 8px; }
+          .hero-cta-primary   { padding: 11px 20px; font-size: 13px; gap: 6px; }
+          .hero-cta-secondary { padding: 10px 18px; font-size: 12.5px; }
+          .hero-live-badge    { font-size: 10px; padding: 5px 10px; margin-bottom: 12px; gap: 6px; }
+          .hero-divider  { display: none; }
         }
 
         .hero-live-badge {
@@ -187,7 +188,7 @@ export default function Hero() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 sm:px-10 lg:px-20 pb-32 sm:pb-24 lg:pb-32">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-10 sm:px-12 lg:px-20 pb-32 sm:pb-24 lg:pb-32">
           <AnimatePresence mode="wait">
             <motion.div
               key={vidIdx}
