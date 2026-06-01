@@ -236,14 +236,6 @@ export default function About() {
           .ab-stats-row { grid-template-columns: 1fr 1fr; }
           .ab-badge-rating span:last-child { display: none; }
         }
-        @media (max-width: 479px) {
-          .ab-badge-exp { padding: 7px 10px; }
-          .ab-badge-exp-val { font-size: 18px; }
-          .ab-badge-rating { padding: 4px 8px; }
-          .ab-badge-certified { padding: 4px 8px; }
-          .ab-stat-card { padding: 10px 8px; }
-          .ab-stat-value { font-size: 17px; }
-        }
         .ab-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -251,13 +243,42 @@ export default function About() {
           align-items: start;
         }
         @media (max-width: 1023px) {
-          .ab-grid { grid-template-columns: 1fr; gap: 48px; }
+          .ab-grid { grid-template-columns: 1fr; gap: 32px; }
         }
         @media (max-width: 639px) {
-          #about { padding: 64px 0; }
-          .ab-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
-          .ab-img-main { grid-row: auto; height: 220px; }
-          .ab-img-sm { height: 170px; }
+          #about { padding: 48px 0; }
+
+          /* Typography compacte */
+          .ab-title { font-size: 24px !important; }
+          .ab-body  { font-size: 13.5px; line-height: 1.65; }
+          .ab-check-label { font-size: 13px; }
+          .ab-partner-tag { font-size: 11px; padding: 4px 10px; }
+
+          /* Image : garder seulement la principale */
+          .ab-mosaic {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: 0;
+          }
+          .ab-img-main { grid-row: auto; height: 200px; border-radius: 12px; }
+          .ab-img-sm   { display: none; }
+
+          /* Badges sur l'image principale */
+          .ab-badge-exp    { padding: 6px 10px; }
+          .ab-badge-exp-val { font-size: 16px; }
+          .ab-badge-exp-lbl { font-size: 10px; }
+          .ab-badge-rating { padding: 4px 8px; gap: 4px; }
+          .ab-badge-rating svg { width: 9px; height: 9px; }
+
+          /* Stats panel compact */
+          .ab-stats-panel { padding: 14px; margin-top: 10px; }
+          .ab-stats-row   { grid-template-columns: 1fr 1fr; gap: 6px; }
+          .ab-stat-card   { padding: 10px 8px; border-radius: 8px; }
+          .ab-stat-value  { font-size: 16px; }
+          .ab-stat-label  { font-size: 9px; }
+
+          /* Colonne texte : espacement réduit */
+          .ab-text-col { gap: 18px !important; }
         }
       `}</style>
 
@@ -266,7 +287,7 @@ export default function About() {
           <div className="ab-grid">
 
             {/* ── LEFT: text ── */}
-            <motion.div {...inView(0)} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            <motion.div {...inView(0)} className="ab-text-col" style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
 
               <div>
                 <p className="ab-eyebrow" style={{ marginBottom: '16px' }}>À propos</p>
