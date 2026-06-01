@@ -20,7 +20,6 @@ const COLORS = [
 ]
 
 useGLTF.setDecoderPath('/draco/')
-CARS.forEach(c => useGLTF.preload(c.file))
 
 function CarModel({ file, color }) {
   const group = useRef()
@@ -89,6 +88,10 @@ export default function CarShowcase3D() {
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
+
+  useEffect(() => {
+    if (!isMobile) CARS.forEach(c => useGLTF.preload(c.file))
+  }, [isMobile])
 
   const prev = () => setCarIdx(i => (i - 1 + CARS.length) % CARS.length)
   const next = () => setCarIdx(i => (i + 1) % CARS.length)

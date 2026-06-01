@@ -13,22 +13,29 @@ const CarShowcase3D = lazy(() => import('./components/CarShowcase3D'))
 
 function LazyCarShowcase() {
   const [visible, setVisible] = useState(false)
+  const [isMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches
+  )
   const ref = useRef()
 
   useEffect(() => {
+    // On mobile, show immediately (no 3D canvas to lazy-load)
+    if (isMobile) { setVisible(true); return }
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
-      { rootMargin: '300px' }
+      { rootMargin: '400px' }
     )
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [])
+  }, [isMobile])
+
+  const fallback = <div style={{ height: isMobile ? '0' : '600px', background: '#F8F7F4' }} />
 
   return (
     <div ref={ref}>
       {visible
-        ? <Suspense fallback={<div style={{ height: '600px', background: '#0F172A' }} />}><CarShowcase3D /></Suspense>
-        : <div style={{ height: '600px', background: '#0F172A' }} />
+        ? <Suspense fallback={fallback}><CarShowcase3D /></Suspense>
+        : fallback
       }
     </div>
   )
