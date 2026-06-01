@@ -31,9 +31,17 @@ export default function Hero() {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
         /* Desktop: strip(36) + bar(84) = 120px */
-        /* Mobile:  strip(36) + bar(70) = 106px */
-        .hero-root { padding-top: 120px; }
-        @media (max-width: 1023px) { .hero-root { padding-top: 106px; } }
+        /* Mobile:  strip(36) + bar(70) = 106px + safe-area-inset-top pour iPhone notch */
+        .hero-root {
+          padding-top: 120px;
+          min-height: 100svh;
+          min-height: -webkit-fill-available;
+        }
+        @media (max-width: 1023px) {
+          .hero-root {
+            padding-top: calc(106px + env(safe-area-inset-top, 0px));
+          }
+        }
 
         .hero-eyebrow {
           font-family: 'DM Sans', sans-serif;
@@ -117,6 +125,7 @@ export default function Hero() {
           .hero-cta-secondary { padding: 10px 18px; font-size: 12.5px; }
           .hero-live-badge    { font-size: 10px; padding: 5px 10px; margin-bottom: 12px; gap: 6px; }
           .hero-divider  { display: none; }
+          .hero-pb-safe  { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
         }
 
         .hero-live-badge {
@@ -156,7 +165,8 @@ export default function Hero() {
 
       <section
         id="home"
-        className="relative min-h-screen flex items-end overflow-hidden hero-root"
+        className="relative flex items-end overflow-hidden hero-root"
+        style={{ minHeight: '100svh' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -188,7 +198,7 @@ export default function Hero() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-10 sm:px-12 lg:px-20 pb-32 sm:pb-24 lg:pb-32">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-10 sm:px-12 lg:px-20 pb-32 sm:pb-24 lg:pb-32 hero-pb-safe">
           <AnimatePresence mode="wait">
             <motion.div
               key={vidIdx}

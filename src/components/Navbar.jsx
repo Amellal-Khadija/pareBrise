@@ -62,7 +62,8 @@ export default function Navbar() {
         ───────────────────────────────────────── */
         .nb-strip {
           position: fixed; top: 0; left: 0; right: 0; z-index: 61;
-          height: 36px;
+          height: calc(36px + env(safe-area-inset-top, 0px));
+          padding-top: env(safe-area-inset-top, 0px);
           background: #060D1A;
           overflow: hidden;
           transition: height 0.22s ease, opacity 0.22s ease;
@@ -114,10 +115,20 @@ export default function Navbar() {
           background: rgba(255,255,255,0.97);
           border-bottom: 1px solid rgba(226,232,240,0.8);
           transition: top 0.22s ease, box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+          padding-left: env(safe-area-inset-left, 0px);
+          padding-right: env(safe-area-inset-right, 0px);
         }
         @media (max-width: 1023px) {
           .nb-bar { height: 70px; }
           .nb-logo img { height: 56px !important; }
+        }
+        /* Quand le strip disparaît, la barre monte à top:0 — ajouter padding-top pour notch */
+        .nb-bar.at-top {
+          padding-top: env(safe-area-inset-top, 0px);
+          height: calc(70px + env(safe-area-inset-top, 0px));
+        }
+        @media (min-width: 1024px) {
+          .nb-bar.at-top { height: calc(84px + env(safe-area-inset-top, 0px)); }
         }
 
         .nb-bar.scrolled {
@@ -314,7 +325,8 @@ export default function Navbar() {
 
         /* CTA row */
         .dw-foot {
-          padding: 14px 16px 20px; border-top: 1px solid #F1F5F9;
+          padding: 14px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+          border-top: 1px solid #F1F5F9;
           flex-shrink: 0;
         }
         .dw-cta-btn {
@@ -366,7 +378,7 @@ export default function Navbar() {
 
       {/* ── TIER 2 : Main bar ── */}
       <header
-        className={`nb-bar${scrolled ? ' scrolled' : ''}`}
+        className={`nb-bar${scrolled ? ' scrolled' : ''}${!topBarVisible ? ' at-top' : ''}`}
         style={{ top: `${topBarH}px` }}
       >
         <div className="nb-bar-in">
