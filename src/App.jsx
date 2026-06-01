@@ -1,14 +1,38 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import CarShowcase3D from './components/CarShowcase3D'
 import JobImages from './components/JobImages'
 import Services from './components/Services'
 import HowWeWork from './components/HowWeWork'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+
+const CarShowcase3D = lazy(() => import('./components/CarShowcase3D'))
+
+function LazyCarShowcase() {
+  const [visible, setVisible] = useState(false)
+  const ref = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
+      { rootMargin: '300px' }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref}>
+      {visible
+        ? <Suspense fallback={<div style={{ height: '600px', background: '#0F172A' }} />}><CarShowcase3D /></Suspense>
+        : <div style={{ height: '600px', background: '#0F172A' }} />
+      }
+    </div>
+  )
+}
 
 function WhatsAppFloat() {
   const [visible, setVisible] = useState(false)
@@ -82,7 +106,7 @@ export default function App() {
       <About />
       <Services />
       <HowWeWork />
-      <CarShowcase3D />
+      <LazyCarShowcase />
       <JobImages />
       <Contact />
       <Footer />
