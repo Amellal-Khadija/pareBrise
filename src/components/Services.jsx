@@ -393,17 +393,15 @@ export default function Services() {
 
           /* Strip */
           .svc-strip {
-            padding: 20px 18px;
+            padding: 18px 16px;
             flex-direction: column;
-            align-items: stretch;
-            gap: 16px;
+            align-items: flex-start;
+            gap: 14px;
           }
-          .svc-strip-title { font-size: 15px; }
-          .svc-strip-sub   { font-size: 13px; }
-          .btn-call, .btn-devis {
-            justify-content: center;
-            width: 100%;
-          }
+          .svc-strip-title { font-size: 14px; }
+          .svc-strip-sub   { font-size: 12px; }
+          .btn-call  { padding: 9px 16px; font-size: 12px; }
+          .btn-devis { padding: 9px 18px; font-size: 12px; }
         }
       `}</style>
 

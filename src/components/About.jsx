@@ -279,6 +279,9 @@ export default function About() {
 
           /* Colonne texte : espacement réduit */
           .ab-text-col { gap: 18px !important; }
+
+          /* Bouton */
+          .ab-cta { padding: 11px 22px; font-size: 13px; }
         }
       `}</style>
 

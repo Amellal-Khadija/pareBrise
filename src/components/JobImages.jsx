@@ -315,11 +315,12 @@ export default function JobImages() {
         .lb-close:hover { background: rgba(255,86,48,0.3); border-color: #FF5630; color: #fff; }
 
         @media (max-width: 639px) {
-          #realisations { padding: 64px 0; }
-          .real-title   { font-size: 28px !important; }
-          .real-strip   { padding: 20px; flex-direction: column; align-items: flex-start; }
+          #realisations { padding: 48px 0; }
+          .real-title   { font-size: 24px !important; }
+          .real-strip   { padding: 18px 16px; flex-direction: column; align-items: flex-start; gap: 14px; }
+          .real-strip-cta { padding: 10px 20px; font-size: 13px; }
           .filter-wrap  { gap: 0; }
-          .filter-tab   { padding: 6px 12px; font-size: 12px; }
+          .filter-tab   { padding: 6px 10px; font-size: 11px; }
         }
       `}</style>
 

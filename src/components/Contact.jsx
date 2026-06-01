@@ -248,10 +248,12 @@ export default function Contact() {
         }
 
         @media (max-width: 639px) {
-          #contact { padding: 64px 0; }
-          .ct-wa-btn, .ct-call-btn { padding: 12px 12px; font-size: 12px; }
-          .ct-left-panel { padding: 28px 20px; }
-          .ct-form-box { padding: 24px 20px !important; }
+          #contact { padding: 48px 0; }
+          .ct-wa-btn, .ct-call-btn { padding: 10px 12px; font-size: 12px; }
+          .ct-left-panel { padding: 22px 18px; }
+          .ct-form-box { padding: 20px 16px !important; }
+          .ct-submit { padding: 12px; font-size: 13px; }
+          .ct-title { font-size: 24px !important; }
         }
 
         .ct-submit {
