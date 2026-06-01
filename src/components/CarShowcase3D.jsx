@@ -90,8 +90,8 @@ export default function CarShowcase3D() {
   }, [])
 
   useEffect(() => {
-    if (!isMobile) CARS.forEach(c => useGLTF.preload(c.file))
-  }, [isMobile])
+    CARS.forEach(c => useGLTF.preload(c.file))
+  }, [])
 
   const prev = () => setCarIdx(i => (i - 1 + CARS.length) % CARS.length)
   const next = () => setCarIdx(i => (i + 1) % CARS.length)
@@ -417,51 +417,56 @@ export default function CarShowcase3D() {
 
             </motion.div>
 
-            {/* RIGHT: 3D Canvas — desktop only */}
-            {!isMobile && (
-              <motion.div {...fadeUp(0.1)}>
-                <div
-                  className="sc-canvas-wrap"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                >
-                  <div className="sc-canvas-h" style={{ position: 'relative' }}>
-                    <Canvas
-                      gl={{ antialias: true, alpha: true }}
-                      camera={{ position: [3.5, 1.8, 4], fov: 45 }}
-                      style={{ width: '100%', height: '100%' }}
-                    >
-                      <ambientLight intensity={1.8} />
-                      <directionalLight position={[8, 10, 5]} intensity={2.5} castShadow />
-                      <directionalLight position={[-5, 5, -5]} intensity={0.8} />
-                      <pointLight position={[0, 3, -2]} intensity={0.4} color="#60A5FA" />
-                      <Suspense fallback={
-                        <mesh>
-                          <boxGeometry args={[1, 1, 1]} />
-                          <meshStandardMaterial color="#334155" />
-                        </mesh>
-                      }>
-                        <Environment preset="city" background={false} />
-                        <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
-                        <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />
-                      </Suspense>
-                      <OrbitControls
-                        enablePan={false}
-                        enableZoom={false}
-                        maxPolarAngle={Math.PI / 1.8}
-                        minPolarAngle={Math.PI / 6}
-                        rotateSpeed={1.4}
-                        autoRotate={!isHovering}
-                        autoRotateSpeed={0.5}
-                      />
-                    </Canvas>
+            {/* RIGHT: 3D Canvas — all devices */}
+            <motion.div {...fadeUp(0.1)}>
+              <div
+                className="sc-canvas-wrap"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                <div className="sc-canvas-h" style={{ position: 'relative' }}>
+                  <Canvas
+                    gl={{
+                      antialias: !isMobile,
+                      alpha: true,
+                      powerPreference: isMobile ? 'default' : 'high-performance',
+                      failIfMajorPerformanceCaveat: false,
+                    }}
+                    dpr={isMobile ? 1 : [1, 2]}
+                    camera={{ position: [3.5, 1.8, 4], fov: 45 }}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    <ambientLight intensity={1.8} />
+                    <directionalLight position={[8, 10, 5]} intensity={isMobile ? 2 : 2.5} />
+                    <directionalLight position={[-5, 5, -5]} intensity={0.8} />
+                    <pointLight position={[0, 3, -2]} intensity={0.4} color="#60A5FA" />
+                    <Suspense fallback={
+                      <mesh>
+                        <boxGeometry args={[1, 1, 1]} />
+                        <meshStandardMaterial color="#334155" />
+                      </mesh>
+                    }>
+                      <Environment preset="city" background={false} />
+                      <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
+                      {!isMobile && <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />}
+                    </Suspense>
+                    <OrbitControls
+                      enablePan={false}
+                      enableZoom={false}
+                      maxPolarAngle={Math.PI / 1.8}
+                      minPolarAngle={Math.PI / 6}
+                      rotateSpeed={1.4}
+                      autoRotate={!isHovering}
+                      autoRotateSpeed={0.5}
+                    />
+                  </Canvas>
 
-                    <button className="sc-arrow" style={{ left: '14px' }} onClick={prev} aria-label="Précédent">‹</button>
-                    <button className="sc-arrow" style={{ right: '14px' }} onClick={next} aria-label="Suivant">›</button>
+                  <button className="sc-arrow" style={{ left: '14px' }} onClick={prev} aria-label="Précédent">‹</button>
+                  <button className="sc-arrow" style={{ right: '14px' }} onClick={next} aria-label="Suivant">›</button>
 
-                    <div className="sc-canvas-foot">
-                      <div className="sc-live">
-                        <div className="sc-live-dot" />
+                  <div className="sc-canvas-foot">
+                    <div className="sc-live">
+                      <div className="sc-live-dot" />
                         3D Live
                       </div>
                       <div className="sc-hint">
@@ -473,8 +478,7 @@ export default function CarShowcase3D() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            )}
+            </motion.div>
 
           </div>
         </div>
