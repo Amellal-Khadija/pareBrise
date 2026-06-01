@@ -79,6 +79,16 @@ export default function CarShowcase3D() {
   const [carIdx,     setCarIdx]     = useState(0)
   const [carColor,   setCarColor]   = useState('#D4E8F5')
   const [isHovering, setIsHovering] = useState(false)
+  const [isMobile,   setIsMobile]   = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)')
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   const prev = () => setCarIdx(i => (i - 1 + CARS.length) % CARS.length)
   const next = () => setCarIdx(i => (i + 1) % CARS.length)
@@ -289,9 +299,20 @@ export default function CarShowcase3D() {
         }
 
         @media (max-width: 639px) {
-          #showcase-3d { padding: 56px 0; }
-          .sc-cta { width: 100%; justify-content: center; }
-          .sc-pills { gap: 6px; }
+          #showcase-3d { padding: 48px 0; }
+          .sc-grid { gap: 0; }
+          .sc-title { font-size: 22px !important; }
+          .sc-desc { font-size: 13px; line-height: 1.65; }
+          .sc-eyebrow { font-size: 9px; letter-spacing: 0.16em; }
+          .sc-pills { gap: 6px; flex-wrap: wrap; }
+          .sc-pill { font-size: 11px; padding: 4px 10px; }
+          .sc-ctrl-label { font-size: 9px; }
+          .sc-tabs { flex-wrap: wrap; gap: 3px; }
+          .sc-tab { padding: 6px 10px; font-size: 11.5px; }
+          .sc-swatches { gap: 5px; }
+          .sc-swatch { width: 22px; height: 22px; }
+          .sc-cta { padding: 11px 20px; font-size: 13px; align-self: stretch; justify-content: center; }
+          .sc-controls { gap: 14px; }
         }
       `}</style>
 
@@ -393,62 +414,64 @@ export default function CarShowcase3D() {
 
             </motion.div>
 
-            {/* RIGHT: 3D Canvas — sans fond */}
-            <motion.div {...fadeUp(0.1)}>
-              <div
-                className="sc-canvas-wrap"
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <div className="sc-canvas-h" style={{ position: 'relative' }}>
-                  <Canvas
-                    gl={{ antialias: true, alpha: true }}
-                    camera={{ position: [3.5, 1.8, 4], fov: 45 }}
-                    style={{ width: '100%', height: '100%' }}
-                  >
-                    <ambientLight intensity={1.8} />
-                    <directionalLight position={[8, 10, 5]} intensity={2.5} castShadow />
-                    <directionalLight position={[-5, 5, -5]} intensity={0.8} />
-                    <pointLight position={[0, 3, -2]} intensity={0.4} color="#60A5FA" />
-                    <Suspense fallback={
-                      <mesh>
-                        <boxGeometry args={[1, 1, 1]} />
-                        <meshStandardMaterial color="#334155" />
-                      </mesh>
-                    }>
-                      <Environment preset="city" background={false} />
-                      <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
-                      <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />
-                    </Suspense>
-                    <OrbitControls
-                      enablePan={false}
-                      enableZoom={false}
-                      maxPolarAngle={Math.PI / 1.8}
-                      minPolarAngle={Math.PI / 6}
-                      rotateSpeed={1.4}
-                      autoRotate={!isHovering}
-                      autoRotateSpeed={0.5}
-                    />
-                  </Canvas>
+            {/* RIGHT: 3D Canvas — desktop only */}
+            {!isMobile && (
+              <motion.div {...fadeUp(0.1)}>
+                <div
+                  className="sc-canvas-wrap"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
+                  <div className="sc-canvas-h" style={{ position: 'relative' }}>
+                    <Canvas
+                      gl={{ antialias: true, alpha: true }}
+                      camera={{ position: [3.5, 1.8, 4], fov: 45 }}
+                      style={{ width: '100%', height: '100%' }}
+                    >
+                      <ambientLight intensity={1.8} />
+                      <directionalLight position={[8, 10, 5]} intensity={2.5} castShadow />
+                      <directionalLight position={[-5, 5, -5]} intensity={0.8} />
+                      <pointLight position={[0, 3, -2]} intensity={0.4} color="#60A5FA" />
+                      <Suspense fallback={
+                        <mesh>
+                          <boxGeometry args={[1, 1, 1]} />
+                          <meshStandardMaterial color="#334155" />
+                        </mesh>
+                      }>
+                        <Environment preset="city" background={false} />
+                        <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
+                        <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />
+                      </Suspense>
+                      <OrbitControls
+                        enablePan={false}
+                        enableZoom={false}
+                        maxPolarAngle={Math.PI / 1.8}
+                        minPolarAngle={Math.PI / 6}
+                        rotateSpeed={1.4}
+                        autoRotate={!isHovering}
+                        autoRotateSpeed={0.5}
+                      />
+                    </Canvas>
 
-                  <button className="sc-arrow" style={{ left: '14px' }} onClick={prev} aria-label="Précédent">‹</button>
-                  <button className="sc-arrow" style={{ right: '14px' }} onClick={next} aria-label="Suivant">›</button>
+                    <button className="sc-arrow" style={{ left: '14px' }} onClick={prev} aria-label="Précédent">‹</button>
+                    <button className="sc-arrow" style={{ right: '14px' }} onClick={next} aria-label="Suivant">›</button>
 
-                  <div className="sc-canvas-foot">
-                    <div className="sc-live">
-                      <div className="sc-live-dot" />
-                      3D Live
-                    </div>
-                    <div className="sc-hint">
-                      <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l4-4 4 4M16 15l-4 4-4-4"/>
-                      </svg>
-                      Glissez pour pivoter
+                    <div className="sc-canvas-foot">
+                      <div className="sc-live">
+                        <div className="sc-live-dot" />
+                        3D Live
+                      </div>
+                      <div className="sc-hint">
+                        <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l4-4 4 4M16 15l-4 4-4-4"/>
+                        </svg>
+                        Glissez pour pivoter
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
 
           </div>
         </div>
