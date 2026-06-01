@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #F8F7F4;
+  color: #475569;
+  font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { cursor: pointer; }
+
+#root { width: 100%; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #0EA5E9; border-radius: 8px; }
+::selection { background: rgba(14,165,233,0.15); color: #0F172A; }
+
+/* Section wrapper */
+.section-wrap {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (min-width: 640px)  { .section-wrap { padding-left: 2rem;   padding-right: 2rem;   } }
+@media (min-width: 1024px) { .section-wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+
+/* Responsive helpers */
+@media (max-width: 639px) {
+  .sm-stack { flex-direction: column !important; }
+  .sm-full  { width: 100% !important; }
+}
