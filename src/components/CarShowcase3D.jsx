@@ -6,7 +6,7 @@ import * as THREE from 'three'
 
 const CARS = [
   { file: '/car.glb',  label: 'Berline'  },
-  { file: '/car1.glb', label: 'SUV'      },
+
   { file: '/car2.glb', label: 'Citadine' },
   { file: '/car3.glb', label: 'Break'    },
 ]
