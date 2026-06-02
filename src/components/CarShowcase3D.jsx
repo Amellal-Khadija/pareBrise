@@ -1,7 +1,7 @@
 import { Suspense, useRef, useMemo, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Environment, ContactShadows, useGLTF } from '@react-three/drei'
+import { OrbitControls, ContactShadows, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 const CARS = [
@@ -446,7 +446,6 @@ export default function CarShowcase3D() {
                         <meshStandardMaterial color="#334155" />
                       </mesh>
                     }>
-                      <Environment preset="city" background={false} />
                       <CarModel key={carIdx} file={CARS[carIdx].file} color={carColor} />
                       {!isMobile && <ContactShadows position={[0, -1.8, 0]} opacity={0.3} scale={14} blur={3} far={5} color="#000000" />}
                     </Suspense>
