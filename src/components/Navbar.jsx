@@ -13,7 +13,12 @@ const LINKS = [
 const ALL_LINKS = [{ label: 'Accueil', href: '#home' }, ...LINKS]
 
 function scrollTo(id) {
-  document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+  const el = document.querySelector(id)
+  if (!el) return
+  const strip = document.querySelector('.nb-strip')
+  const bar   = document.querySelector('.nb-bar')
+  const offset = (strip?.offsetHeight ?? 0) + (bar?.offsetHeight ?? 70) + 8
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
 }
 
 export default function Navbar() {
